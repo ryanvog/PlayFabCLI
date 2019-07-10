@@ -15,7 +15,7 @@
             ExtensionManager extMgr = new ExtensionManager();
             var extensions = await extMgr.DiscoverAsync("..\\extensions");
 
-            Console.WriteLine("Services discovered:");
+            Console.WriteLine("Command factories discovered:");
             foreach (var extension in extensions)
             {
                 foreach (var command in extension.GetCommands())

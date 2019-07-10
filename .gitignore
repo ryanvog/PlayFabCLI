@@ -1,1 +1,7 @@
-/PlayFabPowerTools/bin
+packages
+.DS_Store
+bin
+obj
+Drops
+
+*.suo

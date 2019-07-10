@@ -1,0 +1,7 @@
+<Project>
+    <PropertyGroup>
+        <DropsRoot>$([MSBuild]::GetDirectoryNameOfFileAbove( $(MSBuildProjectDirectory), PlayFabCLI.sln ))\Drops</DropsRoot>
+        <ExtensionDropRoot>$(DropsRoot)\$(Configuration)\$(Platform)\$(TargetFramework)\Extensions</ExtensionDropRoot>
+        <OutDir>$(DropsRoot)\$(Configuration)\$(Platform)\$(TargetFramework)</OutDir>
+    </PropertyGroup>
+</Project>

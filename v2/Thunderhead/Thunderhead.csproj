@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>Microsoft.Gaming.PlayFab.CommandLine.MultiplayerServers</RootNamespace>
+    <AssemblyName>Microsoft.Gaming.PlayFab.CommandLine.MultiplayerServers</AssemblyName>
+    <Outdir>$(ExtensionDropRoot)</Outdir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExtensionSdk\ExtensionSdk.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Composition.AttributedModel" Version="1.3.0-preview6.19303.8" />
+  </ItemGroup>
+</Project>

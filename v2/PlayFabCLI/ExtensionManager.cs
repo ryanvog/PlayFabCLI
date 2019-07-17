@@ -30,12 +30,18 @@ namespace Microsoft.Gaming.PlayFab.CommandLine
         /// <returns></returns>
         public async Task<IEnumerable<ICommandFactory>> DiscoverAsync(params string[] pluginFolders)
         {
-            await ComposeAsync();
+            await ComposeAsync(pluginFolders.FirstOrDefault());
             return Extensions;
         }
 
-        private Task ComposeAsync()
+        private Task ComposeAsync(string pluginFolder)
         {
+            if (!Directory.Exists(pluginFolder))
+            {
+                Extensions = new ICommandFactory[] { };
+                return Task.CompletedTask;
+            }
+
             // Catalogs does not exists in Dotnet Core, so you need to manage your own.
             var assemblies = new List<Assembly>() { typeof(Program).GetTypeInfo().Assembly };
             var pluginAssemblies = Directory.GetFiles(

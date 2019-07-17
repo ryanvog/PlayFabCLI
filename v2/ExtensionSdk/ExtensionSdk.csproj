@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>Microsoft.Gaming.PlayFab.CommandLine.Extensions</AssemblyName>
     <RootNamespace>Microsoft.Gaming.PlayFab.CommandLine.Extensions</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.Composition" Version="1.0.31" />
+    <PackageReference Include="Microsoft.Composition" Version="1.0.31"/>
+    <PackageReference Include="PlayFabAllSDK" Version="1.53.190627"/>
   </ItemGroup>
 </Project>

@@ -6,6 +6,8 @@ namespace Microsoft.Gaming.PlayFab.CommandLine.Extensions
     {
         private object _value;
 
+        public string Id { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -13,6 +15,19 @@ namespace Microsoft.Gaming.PlayFab.CommandLine.Extensions
         public string[] Aliases { get; set; }
 
         public Type OptionType { get; set; }
+
+        public string BaseName
+        {
+            get
+            {
+                if (Name != null)
+                {
+                    return Name.Replace("-", "");
+                }
+
+                return Name;
+            }
+        }
 
         public T GetValue<T>()
         {

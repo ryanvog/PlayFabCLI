@@ -3,5 +3,6 @@
         <DropsRoot>$([MSBuild]::GetDirectoryNameOfFileAbove( $(MSBuildProjectDirectory), PlayFabCLI.sln ))\Drops</DropsRoot>
         <ExtensionDropRoot>$(DropsRoot)\$(Configuration)\$(Platform)\$(TargetFramework)\Extensions</ExtensionDropRoot>
         <OutDir>$(DropsRoot)\$(Configuration)\$(Platform)\$(TargetFramework)</OutDir>
+        <MefVersion>1.0.31</MefVersion>
     </PropertyGroup>
 </Project>

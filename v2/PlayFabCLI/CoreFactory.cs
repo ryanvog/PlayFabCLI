@@ -1,8 +1,9 @@
-namespace Microsoft.Gaming.PlayFab.CommandLine.Extensions
-{
-    using System;
-    using System.Composition;
+using System;
+using System.Composition;
+using Microsoft.Gaming.PlayFab.CommandLine.Extensions;
 
+namespace Microsoft.Gaming.PlayFab.CommandLine
+{
     [Export(typeof(ICommandFactory))]
     internal class CoreFactory : BaseCommandFactory
     {
@@ -14,7 +15,8 @@ namespace Microsoft.Gaming.PlayFab.CommandLine.Extensions
         {
             return new ICommand[]
             {
-                new LoginCommand()
+                new LoginCommand(this),
+                new RootCommand(this),
             };
         }
     }

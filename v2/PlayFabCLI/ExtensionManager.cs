@@ -44,8 +44,7 @@ namespace Microsoft.Gaming.PlayFab.CommandLine
 
             // Catalogs does not exists in Dotnet Core, so you need to manage your own.
             var assemblies = new List<Assembly>() { typeof(Program).GetTypeInfo().Assembly };
-            var pluginAssemblies = Directory.GetFiles(
-                Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Extensions"), "*.dll", SearchOption.TopDirectoryOnly)
+            var pluginAssemblies = Directory.GetFiles(pluginFolder, "*.dll", SearchOption.TopDirectoryOnly)
                 .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
                 // Ensure that the assembly contains an implementation for the given type.
                 .Where(s => s.GetTypes().Where(p => typeof(ICommandFactory).IsAssignableFrom(p)).Any());

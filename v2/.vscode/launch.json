@@ -11,7 +11,7 @@
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/Drops/Debug/AnyCPU/pf.dll",
-            "args": [],
+            "args": ["--version"],
             "cwd": "${workspaceFolder}/Drops/Debug/AnyCPU",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",

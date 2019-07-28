@@ -1,10 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Threading.Tasks;
+
 namespace Microsoft.Gaming.PlayFab.CommandLine.Extensions
 {
-    using System.Collections.Generic;
-    using System.Reflection;
-
     internal abstract class BaseCommand : ICommand
     {
+        public BaseCommand(ICommandFactory factory)
+        {
+            Factory = factory;
+        }
+
         public abstract string Name { get; }
 
         public abstract string Id { get; }
@@ -15,6 +22,8 @@ namespace Microsoft.Gaming.PlayFab.CommandLine.Extensions
 
         public abstract IEnumerable<ICommandOption> Options { get; }
 
-        public abstract MethodInfo GetHandler();
+        public ICommandFactory Factory { get; }
+
+        public abstract int Invoke(IDictionary<string, object> parsedArguments);
     }
 }

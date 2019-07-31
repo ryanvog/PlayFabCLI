@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using McMaster.Extensions.CommandLineUtils;
@@ -26,11 +27,32 @@ namespace Microsoft.Gaming.PlayFab.CommandLine
                 LongVersionGetter = () => command.Factory.Version.ToString(),
             };
 
+            newCommand.ValidationErrorHandler = (result) =>
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(result.ErrorMessage);
+                Console.ResetColor();
+
+                Console.WriteLine();
+                newCommand.ShowHelp(false);
+
+                return 1;
+            };
+
             newCommand.Invoke = () =>
             {
                 IDictionary<string, object> parsedArguments = newCommand.GetParsedArguments(command);
                 return GlobalOptions.InvokeCommand(parsedArguments, newCommand, command.Invoke);
             };
+
+            if (command is RootCommand)
+            {
+                // Global options
+                foreach (ICommandOption mandatoryOption in GlobalOptions.MandatoryOptions)
+                {
+                    newCommand.Options.Add(await optionAdapter.AdaptAsync(mandatoryOption, true));
+                }
+            }
 
             // Extension provided options
             foreach (Cli.ICommandOption option in command.Options)
@@ -38,11 +60,6 @@ namespace Microsoft.Gaming.PlayFab.CommandLine
                 newCommand.Options.Add(await optionAdapter.AdaptAsync(option));
             }
 
-            // Mandatory options
-            foreach (ICommandOption mandatoryOption in GlobalOptions.MandatoryOptions)
-            {
-                newCommand.Options.Add(await optionAdapter.AdaptAsync(mandatoryOption));
-            }
 
             return newCommand;
         }

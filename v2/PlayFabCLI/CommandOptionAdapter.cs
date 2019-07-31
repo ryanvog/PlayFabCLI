@@ -1,5 +1,6 @@
 namespace Microsoft.Gaming.PlayFab.CommandLine
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using McMaster.Extensions.CommandLineUtils;
@@ -7,22 +8,51 @@ namespace Microsoft.Gaming.PlayFab.CommandLine
 
     internal interface ICommandOptionAdapter
     {
-        Task<CommandOption> AdaptAsync(Cli.ICommandOption option);
+        Task<CommandOption> AdaptAsync(Cli.ICommandOption option, bool globalOption = false);
     }
 
     internal class CommandOptionAdapter : ICommandOptionAdapter
     {
-        public Task<CommandOption> AdaptAsync(Cli.ICommandOption option)
+        public Task<CommandOption> AdaptAsync(Cli.ICommandOption option, bool globalOption = false)
         {
+            CommandOptionType style = AdaptStyle(option.Style);
+
             var newOption = new CommandOption(
                 string.Join('|', option.Aliases.Union(new string[] { option.Name })),
-                CommandOptionType.SingleOrNoValue)
+                style)
             {
                 Description = option.Description,
-                ShowInHelpText = true,
+                ShowInHelpText = true
             };
 
+            if (option.IsRequired)
+            {
+                newOption.IsRequired();
+            }
+
+            if (globalOption)
+            {
+                newOption.Inherited = true;
+            }
+
+            if (option.Validator != null)
+            {
+                newOption.Validators.Add(new BaseOptionValidator(newOption, option.Validator));
+            }
+
             return Task.FromResult(newOption);
+        }
+
+        private CommandOptionType AdaptStyle(Cli.CommandOptionType style)
+        {
+            switch (style)
+            {
+                case Cli.CommandOptionType.SingleValue: return CommandOptionType.SingleValue;
+                case Cli.CommandOptionType.SingleOrNoValue: return CommandOptionType.SingleOrNoValue;
+                case Cli.CommandOptionType.MultipleValues: return CommandOptionType.MultipleValue;
+                case Cli.CommandOptionType.NoValue: return CommandOptionType.NoValue;
+                default: return CommandOptionType.SingleValue;
+            }
         }
     }
 }

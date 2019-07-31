@@ -36,8 +36,20 @@ namespace Microsoft.Gaming.PlayFab.CommandLine.Extensions
         string Description { get; }
         string[] Aliases { get; }
         Type OptionType { get; }
-
+        CommandOptionType Style { get; }
         string BaseName { get; }
+        bool IsRequired { get; }
+        
+        Func<object, (bool IsValid, string ErrorMessage)> Validator { get; }
+
         T GetValue<T>();
+    }
+
+    public enum CommandOptionType
+    {
+        SingleValue = 0,
+        SingleOrNoValue = 1,
+        MultipleValues = 2,
+        NoValue = 3,
     }
 }

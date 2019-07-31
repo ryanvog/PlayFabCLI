@@ -41,7 +41,7 @@ namespace Microsoft.Gaming.PlayFab.CommandLine
 
                 if (sourceOption == null)
                 {
-                    throw new ArgumentException("Extension command option list does not match compiled set.");
+                    throw new ArgumentException($"Extension command option list does not match compiled set (source={option.ShortName}|{option.LongName}).");
                 }
 
                 // A switch is indicated as being passed if there is at least one value in the Values collection

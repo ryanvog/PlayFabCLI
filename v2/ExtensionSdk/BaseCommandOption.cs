@@ -16,6 +16,12 @@ namespace Microsoft.Gaming.PlayFab.CommandLine.Extensions
 
         public Type OptionType { get; set; }
 
+        public CommandOptionType Style { get; set; }
+
+        public bool IsRequired { get; set; }
+
+        public Func<object, (bool IsValid, string ErrorMessage)> Validator { get; set; }
+
         public string BaseName
         {
             get

@@ -50,6 +50,7 @@ namespace Microsoft.Gaming.PlayFab.CommandLine
                 Aliases = new string[] { "-e" },
                 Description = "Email address used to acquire an entity token.",
                 OptionType = typeof(string),
+                IsRequired = true,
             },
             new BaseCommandOption
             {
@@ -58,6 +59,7 @@ namespace Microsoft.Gaming.PlayFab.CommandLine
                 Aliases = new string[] { "-p" },
                 Description = "Password used to acquire an entity token.",
                 OptionType = typeof(string),
+                IsRequired = true,
             },
             new BaseCommandOption
             {
@@ -66,6 +68,7 @@ namespace Microsoft.Gaming.PlayFab.CommandLine
                 Aliases = new string[] { "-t" },
                 Description = "The title ID used to acquire an entity token.",
                 OptionType = typeof(string),
+                IsRequired = true,
             },
         };
     }
